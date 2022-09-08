@@ -1,0 +1,19 @@
+{
+  name: 'Bande PHC 18 TO 44 COVISHIELD',
+  session: [
+    { available_capacity: 15000, vaccine: 'COVISHIELD' },
+    { available_capacity: 15000, vaccine: 'COVISHIELD' }
+  ]
+}
+{
+  name: 'SHC P.V.26 Covishield 18 To 44',
+  session: [ { available_capacity: 600, vaccine: 'COVISHIELD' } ]
+}
+{
+  name: 'PHC Bande Hospital',
+  session: [ { available_capacity: 1500, vaccine: 'COVISHIELD' } ]
+}
+{
+  name: 'SHC P.V.34 Covishield 18 To 44',
+  session: [ { available_capacity: 600, vaccine: 'COVISHIELD' } ]
+}

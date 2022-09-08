@@ -1,3 +1,4 @@
+const { number } = require('joi');
 const Joi = require('joi');
 
 
@@ -13,15 +14,10 @@ const objectValidate = async (req, res, next) => {
 
     const formattedToday = dd + '-' + mm + '-' + yyyy;
     
-    body = req.body
-    const schema = Joi.object({
-        district_id: Joi.number(),
-        date: Joi.string(),
-        limit: Joi.number()
-
-    })
+    
     try {
-         await schema.validateAsync(body);
+        body = req.body
+        if(typeof(body.district_id)=="number"&&typeof(body.date)=="string"&&typeof(body.limit)=="number"){
         if (!body.limit || body.limit > 20) {
             body.limit = 10
         }
@@ -30,7 +26,7 @@ const objectValidate = async (req, res, next) => {
         var result = dateArray.map(function (x) { 
             return parseInt(x, 10); 
           });
-        if (result[0]>=dd && result[1]>=mm && result[2]>=yyyy) {
+        if (result[0]>=dd && result[1]>=mm && result[1]<12 && result[2]>=yyyy) {
             console.log("validation pass");
             next()
         }
@@ -38,11 +34,30 @@ const objectValidate = async (req, res, next) => {
             console.log("not passed");
             return res.status(500).send({
                 code: 500,
-                message: "Bad INPUT! Please check your date format (dd-mm-yyyy)"
+                message: "Please enter Today's date or future Date, (DD-MM-YYYY)"
+            })
+        }
+    }else{
+        if(typeof(body.district_id)!="number"){
+            return res.status(500).send({
+                code: 500,
+                message: "district id must be a Number"
+            })
+        }else if(typeof(body.date)!="string"){
+            return res.status(500).send({
+                code: 500,
+                message: "Date must me a String"
+            })
+        }else if(typeof(body.limit)!="number"){
+            return res.status(500).send({
+                code: 500,
+                message: "Limit must me a Number"
             })
         }
     }
+    }
     catch (error) {
+        console.log(error);
         return res.status(500).send(res.status(500).send({
             "code": 500,
             "message": error.message
