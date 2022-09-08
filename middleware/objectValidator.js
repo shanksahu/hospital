@@ -41,17 +41,17 @@ const objectValidate = async (req, res, next) => {
         if(typeof(body.district_id)!="number"){
             return res.status(500).send({
                 code: 500,
-                message: "district id must be a Number"
+                message: "Invalid District Id!, District id must be a Number"
             })
         }else if(typeof(body.date)!="string"){
             return res.status(500).send({
                 code: 500,
-                message: "Date must me a String"
+                message: "Invalid Date!, Date must me a String"
             })
         }else if(typeof(body.limit)!="number"){
             return res.status(500).send({
                 code: 500,
-                message: "Limit must me a Number"
+                message: "Invalid Limit!, Limit must me a Number"
             })
         }
     }
